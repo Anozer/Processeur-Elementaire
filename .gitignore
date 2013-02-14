@@ -1,0 +1,8 @@
+#ignorer les fichiers invisibles OS X
+.DS_Store
+
+#ignorer tout le contenu du dossier Xilinx ISE
+Processeur8bits/*
+
+#sauf le VHDL
+!Processeur8bits/*.vhd
