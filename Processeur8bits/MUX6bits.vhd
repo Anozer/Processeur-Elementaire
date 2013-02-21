@@ -2,7 +2,7 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    12:02:43 02/14/2013 
+-- Create Date:    09:34:44 02/21/2013 
 -- Design Name: 
 -- Module Name:    MUX6bits - Behavioral 
 -- Project Name: 
@@ -30,12 +30,18 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity MUX6bits is
+    Port ( Data_In_0 : in  STD_LOGIC_VECTOR (5 downto 0);
+           Data_In_1 : in  STD_LOGIC_VECTOR (5 downto 0);
+           Channel   : in  STD_LOGIC;
+           Data_Out  : out  STD_LOGIC_VECTOR (5 downto 0));
 end MUX6bits;
 
 architecture Behavioral of MUX6bits is
 
 begin
 
-
+		Data_Out <= Data_In_0 WHEN Channel ='0' ELSE
+						Data_In_1;
+		
 end Behavioral;
 
