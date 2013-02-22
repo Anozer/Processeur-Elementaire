@@ -4,7 +4,8 @@
 #ignorer tout le contenu du dossier Xilinx ISE
 Processeur8bits/*
 
-#sauf le VHDL
+#sauf les VHDL, les configs de pins, les configs de testbench et les bitstreams
 !Processeur8bits/*.vhd
 !Processeur8bits/*.ucf
 !Processeur8bits/*.wcfg
+!Processeur8bits/*.bit
