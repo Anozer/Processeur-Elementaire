@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="Z:/Dev/VHDL/Processeur Elementaire/Processeur8bits/CPU_8bits_TestBench_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="cpu_8bits_testbench" />
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+            <top_module name="std_logic_arith" />
+            <top_module name="std_logic_unsigned" />
+            <top_module name="textio" />
+            <top_module name="vcomponents" />
+            <top_module name="vital_primitives" />
+            <top_module name="vital_timing" />
+            <top_module name="vpkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="21" />
+   <wvobject fp_name="/cpu_8bits_testbench/clk100m_period" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">clk100m_period</obj_property>
+      <obj_property name="ObjectShortName">clk100m_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/clk100m" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk100m</obj_property>
+      <obj_property name="ObjectShortName">clk100m</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/uut/clk25m" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk25m</obj_property>
+      <obj_property name="ObjectShortName">clk25m</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/uut/ce25m" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ce25m</obj_property>
+      <obj_property name="ObjectShortName">ce25m</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/reset" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/valid_saisie" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">valid_saisie</obj_property>
+      <obj_property name="ObjectShortName">valid_saisie</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/astb" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">astb</obj_property>
+      <obj_property name="ObjectShortName">astb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/dstb" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">dstb</obj_property>
+      <obj_property name="ObjectShortName">dstb</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/pwr" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">pwr</obj_property>
+      <obj_property name="ObjectShortName">pwr</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/pdb" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">pdb[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pdb[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/an1" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">an1</obj_property>
+      <obj_property name="ObjectShortName">an1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/an2" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">an2</obj_property>
+      <obj_property name="ObjectShortName">an2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/an3" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">an3</obj_property>
+      <obj_property name="ObjectShortName">an3</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/an4" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">an4</obj_property>
+      <obj_property name="ObjectShortName">an4</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/sevenseg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">sevenseg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">sevenseg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/led" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">led[7:0]</obj_property>
+      <obj_property name="ObjectShortName">led[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/pwait" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">pwait</obj_property>
+      <obj_property name="ObjectShortName">pwait</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/ldg" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ldg</obj_property>
+      <obj_property name="ObjectShortName">ldg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/uut/data_mem_unit" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">data_mem_unit[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_mem_unit[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/uut/data_unit_mem" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">data_unit_mem[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_unit_mem[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#ff0000</obj_property>
+   </wvobject>
+   <wvobject fp_name="/cpu_8bits_testbench/uut/adr" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">adr[5:0]</obj_property>
+      <obj_property name="ObjectShortName">adr[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">#00ffff</obj_property>
+   </wvobject>
+</wave_config>

@@ -6,3 +6,5 @@ Processeur8bits/*
 
 #sauf le VHDL
 !Processeur8bits/*.vhd
+!Processeur8bits/*.ucf
+!Processeur8bits/*.wcfg
