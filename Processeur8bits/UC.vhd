@@ -4,7 +4,7 @@
 -- 
 -- Create Date:    12:13:46 02/14/2013 
 -- Design Name: 
--- Module Name:    UC - Behavioral 
+-- Module Name:    Control_Unit - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,23 +29,23 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity UC is
-	Port (	H						: in	STD_LOGIC;							-- Horloge
-				RST					: in	STD_LOGIC;							-- Reset asynchrone du composant
-				CE						: in  STD_LOGIC;							-- Clock Enable, actication du composant
-				Mem_From				: in	STD_LOGIC_VECTOR(7 downto 0);	-- Data lue de la mémoire
-				Mem_Addr				: out	STD_LOGIC_VECTOR(5 downto 0);	-- Adresse mémoire à lire/écrire
-				Mem_Enable			: out STD_LOGIC;							-- Autorisation mémoire
-				Mem_RW				: out STD_LOGIC;							-- Lecture(0) ou écriture (1) mémoire
-				UT_Carry				: in	STD_LOGIC;							-- Retenue de l'UAL
-				UT_Sel_UAL			: out STD_LOGIC;							-- Choix oppération UAL, 0:NOR 1:ADD
-				UT_Load_RegData	: out STD_LOGIC;							-- Chargement registre data UT (depuis mémoire)
-				UT_Load_RegAccu	: out STD_LOGIC;							-- Chargement registre Accu UT (depuis UAL)
-				UT_Load_RegCarry	: out STD_LOGIC;							-- Chargement registre Carry (depuis UAL)
-				UT_Init_Carry		: out STD_LOGIC);							-- Init de la carry	
-end UC;
+entity Control_Unit is
+	Port (Clk				: in   STD_LOGIC;
+			Ce					: in   STD_LOGIC;
+			Reset				: in   STD_LOGIC;
+			Carry				: in   STD_LOGIC;
+			Data_In			: in   STD_LOGIC_VECTOR (7 downto 0);
+			Adr				: out  STD_LOGIC_VECTOR (5 downto 0);
+			Clear_Carry		: out  STD_LOGIC;
+			Enable_Mem		: out  STD_LOGIC;
+			Load_Reg1		: out  STD_LOGIC;
+			Load_Reg_Accu	: out  STD_LOGIC;
+			Load_Reg_Carry	: out  STD_LOGIC;
+			Sel_UAL			: out  STD_LOGIC;
+			W_Mem				: out  STD_LOGIC);
+end Control_Unit;
 
-architecture Behavioral of UC is
+architecture Behavioral of Control_Unit is
 
 	component Reg8bits
 	Port (H			: in	STD_LOGIC;							-- Horloge
@@ -79,7 +79,7 @@ architecture Behavioral of UC is
 
 	component FSM
 	Port (Clk		: in   STD_LOGIC;
-			Rst		: in   STD_LOGIC;
+			RST		: in   STD_LOGIC;
 			CE			: in   STD_LOGIC;
 			Carry		: in   STD_LOGIC;
 			Code_Op	: in   STD_LOGIC_VECTOR (1 downto 0);
@@ -108,22 +108,22 @@ architecture Behavioral of UC is
 	
 begin
 	UC_RegInst : Reg8bits port map (
-		H,
-		RST,
+		Clk,
+		Reset,
 		CE,
 		RegInst_Load,
-		Mem_From,
+		Data_In,
 		Instruction);
 	
 	UC_MUX : MUX6bits port map (
 		Cpt_DataOut,
 		Instruction(5 downto 0),
 		MUX_Sel,
-		Mem_Addr);
+		Adr);
 		
 	UC_Cpt : Cpt6bits port map (
-		H,
-		RST,
+		Clk,
+		Reset,
 		CE,
 		Instruction(5 downto 0),
 		Cpt_Enable,
@@ -132,23 +132,23 @@ begin
 		Cpt_DataOut);
 	
 	UC_FSM : FSM port map (
-		H,
-		RST,
+		Clk,
+		Reset,
 		CE,
-		UT_Carry,
+		Carry,
 		Instruction(7 downto 6),
 		Cpt_Enable,
 		Cpt_Init,
 		Cpt_Chargement,
 		MUX_Sel,
 		RegInst_Load,
-		Mem_Enable,
-		Mem_RW,
-		UT_Sel_UAL,
-		UT_Load_RegData,
-		UT_Load_RegAccu,
-		UT_Load_RegCarry,
-		UT_Init_Carry);
+		Enable_Mem,
+		W_Mem,
+		Sel_UAL,
+		Load_Reg1,
+		Load_Reg_Accu,
+		Load_Reg_Carry,
+		Clear_Carry);
 
 end Behavioral;
 

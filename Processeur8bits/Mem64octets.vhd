@@ -4,7 +4,7 @@
 -- 
 -- Create Date:    12:15:40 02/14/2013 
 -- Design Name: 
--- Module Name:    Mem64octets - Behavioral 
+-- Module Name:    RAM_SP_64_8 - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -30,19 +30,19 @@ use IEEE.NUMERIC_STD.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Mem64octets is
-	Port (	H			: in	STD_LOGIC;								-- Horloge
-				RST		: in	STD_LOGIC;								-- Reset asynchrone du composant
-				CE			: in  STD_LOGIC;								-- Clock Enable, actication du composant
-				RW			: in  STD_LOGIC;								-- Read/Write, 0:Read, 1:Write
-				Enable	: in  STD_LOGIC;								--	Activation de la mémoire
-				ADDR		: in	STD_LOGIC_VECTOR(5 downto 0);		--	Adresse de la donnée à lire/écrire
-				Data_In	: in	STD_LOGIC_VECTOR(7 downto 0);		--	Donnée à écrire
-				Data_Out : out	STD_LOGIC_VECTOR(7 downto 0));	-- Donnée lue
+entity RAM_SP_64_8 is
 				
-end Mem64octets;
+	Port (ADD		: in  STD_LOGIC_VECTOR (5 downto 0);
+			DATA_IN	: in  STD_LOGIC_VECTOR (7 downto 0);
+			R_W		: in  STD_LOGIC;
+			ENABLE	: in  STD_LOGIC;
+			clk		: in  STD_LOGIC;
+			Ce			: in  STD_LOGIC;
+			DATA_OUT	: out STD_LOGIC_VECTOR (7 downto 0));
+				
+end RAM_SP_64_8;
 
-architecture Behavioral of Mem64octets is
+architecture Behavioral of RAM_SP_64_8 is
 
 type tab64 is array (integer range 0 to 63) of STD_LOGIC_VECTOR(7 downto 0);
 signal memoire : tab64 := (X"08",
@@ -58,24 +58,20 @@ signal memoire : tab64 := (X"08",
 									
 begin
 
-	process (H,RST)
+	process (clk)
 	begin
-		
-		if (RST = '1') then
-			--memoire <= (others => "00000000");
-			Data_Out <= "00000000";
 			
-		elsif (H'event AND H = '0') then
+		if (clk'event AND clk = '0') then
 			if (CE = '1') then
 				if (Enable = '1') then
 				
 					-- lecture
-					if (RW = '0') then
-						Data_Out <= memoire(to_integer(unsigned(ADDR)));
+					if (R_W = '0') then
+						Data_Out <= memoire(to_integer(unsigned(ADD)));
 					
 					-- écriture
-					elsif (RW = '1') then
-						memoire(to_integer(unsigned(ADDR))) <= Data_In;
+					elsif (R_W = '1') then
+						memoire(to_integer(unsigned(ADD))) <= Data_In;
 						
 					end if;
 					

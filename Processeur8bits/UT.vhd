@@ -4,7 +4,7 @@
 -- 
 -- Create Date:    12:13:34 02/14/2013 
 -- Design Name: 
--- Module Name:    UT - Behavioral 
+-- Module Name:    Processing_unit - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,21 +29,22 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity UT is
-	Port (	H					: in	STD_LOGIC;								-- Horloge
-				RST				: in	STD_LOGIC;								-- Reset asynchrone du composant
-				CE					: in  STD_LOGIC;								-- Clock Enable, actication du composant
-				Sel_UAL			: in  STD_LOGIC;								-- Sélection de l'oppération de l'UAL, 0:NOR 1:ADD
-				Init_RegCarry	: in  STD_LOGIC;								-- Initialisation de la FF
-				Load_RegCarry	: in  STD_LOGIC;								-- Chargement de la FF
-				Load_RegData	: in  STD_LOGIC;								-- Chargement du reg de donnée (provenance mémoire)
-				Load_RegAccu	: in  STD_LOGIC;								-- Chargement de l'accu (provenance UAL)
-				From_Mem			: in  STD_LOGIC_VECTOR(7 downto 0);		-- Donnée de la mémoire vers le reg Data
-				To_Mem			: out	STD_LOGIC_VECTOR(7 downto 0);		-- Donnée de l'accu vers la mémoire
-				Carry_Out		: out	STD_LOGIC);								-- Retenue de l'UAL
-end UT;
+entity Processing_unit is
+				
+	Port (Data_in		: in  STD_LOGIC_VECTOR (7 downto 0);
+			clk			: in  STD_LOGIC;
+			Ce				: in  STD_LOGIC;
+			reset			: in  STD_LOGIC;
+			load_reg1	: in  STD_LOGIC;
+			load_accu	: in  STD_LOGIC;
+			load_carry	: in  STD_LOGIC;
+			init_carry	: in  STD_LOGIC;
+			Sel_UAL		: in  STD_LOGIC;
+			Data_out		: out  STD_LOGIC_VECTOR (7 downto 0);
+			Carry			: out  STD_LOGIC);
+end Processing_unit;
 
-architecture Behavioral of UT is
+architecture Behavioral of Processing_unit is
 
 
 
@@ -53,7 +54,7 @@ component UAL
 			Data_In_ACCU	: in	STD_LOGIC_VECTOR(7 downto 0); -- Valeur provenant de l'ACCU
 			Data_In_MEM		: in	STD_LOGIC_VECTOR(7 downto 0); -- Valeur provenant du registre data
 			Data_Out			: out	STD_LOGIC_VECTOR(7 downto 0); -- Valeur calculée
-			Carry_Out		: out STD_LOGIC);							-- Retenue de l'oppération
+			Carry_out		: out STD_LOGIC);							-- Retenue de l'oppération
 end component;
 
 
@@ -86,34 +87,34 @@ signal RegAccu_out	: STD_LOGIC_VECTOR(7 downto 0);
 
 begin
 
-	To_Mem <= RegAccu_out;
+	Data_out <= RegAccu_out;
 
 	RegData : Reg8bits port map (
-		H,
-		RST,
+		clk,
+		reset,
 		CE,
-		Load_RegData,
-		From_Mem,
+		load_reg1,
+		Data_in,
 		RegData_out);
 	
 	
 	RegAccu : Reg8bits port map (
-		H,
-		RST,
+		clk,
+		reset,
 		CE,
-		Load_RegAccu,
+		load_accu,
 		UALdata_out,
 		RegAccu_out);
 		
 		
 	FFcarry : FF1bit port map (
-		H,
-		RST,
+		clk,
+		reset,
 		CE,
-		Init_RegCarry,
-		Load_RegCarry,
+		init_carry,
+		load_carry,
 		UALcarry_out,
-		Carry_Out);
+		Carry);
 		
 		
 	UT_UAL : UAL port map (

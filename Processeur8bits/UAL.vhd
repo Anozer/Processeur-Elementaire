@@ -60,7 +60,7 @@ begin
 			S				:= resize(A,9) + resize(B,9);
 			Data_Out		<= std_logic_vector(S(7 downto 0));
 			Carry_Out	<= std_logic(S(8));
-
+			
 		end if;
 		
 	end process;

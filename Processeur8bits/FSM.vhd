@@ -78,7 +78,6 @@ begin
 	-- Definition des etats futurs en fonction de la FSM				
 	process (etat_present, Carry, Code_Op)
 	begin
-	
 		CASE etat_present IS
 		
 			WHEN INIT 			=>	
@@ -108,13 +107,15 @@ begin
 			WHEN EXECUTE		=>
 				etat_futur <= FETCH_INST;
 				
+			WHEN OTHERS			=>
+				etat_futur <= INIT;
+				
 		END CASE;
-		
 	end process;
 	
 	
 	--Affectation des sorties si l'état présent a changé
-	process (etat_present) begin	
+	process (etat_present, carry, code_op) begin	
 	
 		if 	(etat_present = INIT) then --
 			A <= '0';
@@ -190,7 +191,7 @@ begin
 		elsif (etat_present =   JUMP) then --
 			A <= '0';
 			B <= '0';
-			C <= Carry;
+			C <= not(Carry);
 			D <= '1';
 			E <= '1';
 			F <= '0';
