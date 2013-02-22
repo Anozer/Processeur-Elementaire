@@ -19,11 +19,11 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+--use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
--- use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -44,17 +44,17 @@ end Mem64octets;
 
 architecture Behavioral of Mem64octets is
 
-type tab64 is array (0 to 63) of STD_LOGIC_VECTOR(7 downto 0);
-signal memoire : tab64 := ("00001000",
-									"01000111",
-									"10000110",
-									"11000010",
-									"11000010",
-									"00000000",
-									"00000000",
-									"01111110",
-									"11111110",
-									others => "00000000");
+type tab64 is array (integer range 0 to 63) of STD_LOGIC_VECTOR(7 downto 0);
+signal memoire : tab64 := (X"08",
+									X"47",
+									X"86",
+									X"C4",
+									X"C4",
+									X"00",
+									X"00",
+									X"7E",
+									X"FE",
+									others => X"00");
 									
 begin
 
@@ -65,17 +65,17 @@ begin
 			--memoire <= (others => "00000000");
 			Data_Out <= "00000000";
 			
-		elsif (H'event AND H = '1') then
+		elsif (H'event AND H = '0') then
 			if (CE = '1') then
 				if (Enable = '1') then
 				
 					-- lecture
 					if (RW = '0') then
-						Data_Out <= memoire(conv_integer(ADDR));
+						Data_Out <= memoire(to_integer(unsigned(ADDR)));
 					
 					-- écriture
 					elsif (RW = '1') then
-						memoire(conv_integer(ADDR)) <= Data_In;
+						memoire(to_integer(unsigned(ADDR))) <= Data_In;
 						
 					end if;
 					

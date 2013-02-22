@@ -30,11 +30,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity FSM is
-    Port ( Clk 			: in  STD_LOGIC;
+    Port ( Clk 		: in  STD_LOGIC;
            Rst 		: in  STD_LOGIC;
            CE 			: in  STD_LOGIC;
            Carry 		: in  STD_LOGIC;
-           Code_Op 	: in  STD_LOGIC_VECTOR (1 downto 0);
+           Code_Op	: in  STD_LOGIC_VECTOR (1 downto 0);
            A 			: out  STD_LOGIC;
            B 			: out  STD_LOGIC;
            C 			: out  STD_LOGIC;
@@ -53,14 +53,13 @@ architecture Behavioral of FSM is
 
 -- Types et signaux correspondant aux états de la FSM
 type etats is (INIT, FETCH_INST, DECODE, FETCH_OP, STORE, JUMP, EXECUTE);
-signal etat_present :etats := INIT;
-signal etat_futur :etats := INIT;
+signal etat_present	:etats := INIT;
+signal etat_futur		:etats := INIT;
 
 begin
 
 	-- Actualisation des etats presents à chaque coup d'horloge et gestion du reset
 	process (Clk, Rst) 
-	
 	begin
 	
 		if (Rst = '1') then 
@@ -77,7 +76,8 @@ begin
 	end process;
 	
 	-- Definition des etats futurs en fonction de la FSM				
-	process (Carry, Code_Op) begin
+	process (etat_present, Carry, Code_Op)
+	begin
 	
 		CASE etat_present IS
 		
@@ -209,10 +209,10 @@ begin
 			E <= '0';
 			F <= '0';
 			G <= '0';
-			H <= Code_Op(6);
+			H <= Code_Op(0);
 			I <= '0';
 			J <= '1';
-			K <=  Code_Op(6);
+			K <=  Code_Op(0);
 			L <= '0';
 			
 		else	--

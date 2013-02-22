@@ -31,14 +31,14 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity Cpt6bits is
-    Port ( Data_in  : in  STD_LOGIC_VECTOR (5 downto 0);
-           Enable   : in  STD_LOGIC;
-           Init     : in  STD_LOGIC;
-           Load     : in  STD_LOGIC;
-           Rst      : in  STD_LOGIC;
-           CE       : in  STD_LOGIC;
-           H        : in  STD_LOGIC;
-           Data_out : out  STD_LOGIC_VECTOR (5 downto 0));
+	Port (H			: in  STD_LOGIC;
+			Rst		: in  STD_LOGIC;
+			CE			: in  STD_LOGIC;
+			Data_in	: in  STD_LOGIC_VECTOR (5 downto 0);
+			Enable	: in  STD_LOGIC;
+			Init		: in  STD_LOGIC;
+			Load		: in  STD_LOGIC;
+			Data_out	: out  STD_LOGIC_VECTOR (5 downto 0));
 end Cpt6bits;
 
 architecture Behavioral of Cpt6bits is
