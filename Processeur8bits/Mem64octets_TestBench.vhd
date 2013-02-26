@@ -2,7 +2,7 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   14:07:41 02/22/2013
+-- Create Date:   18:08:09 02/26/2013
 -- Design Name:   
 -- Module Name:   Z:/Dev/VHDL/Processeur Elementaire/Processeur8bits/Mem64octets_TestBench.vhd
 -- Project Name:  Processeur8bits
@@ -10,7 +10,7 @@
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: Mem64octets
+-- VHDL Test Bench Created by ISE for module: RAM_SP_64_8
 -- 
 -- Dependencies:
 -- 
@@ -39,57 +39,53 @@ ARCHITECTURE behavior OF Mem64octets_TestBench IS
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT Mem64octets
+    COMPONENT RAM_SP_64_8
     PORT(
-         H : IN  std_logic;
-         RST : IN  std_logic;
-         CE : IN  std_logic;
-         RW : IN  std_logic;
-         Enable : IN  std_logic;
-         ADDR : IN  std_logic_vector(5 downto 0);
-         Data_In : IN  std_logic_vector(7 downto 0);
-         Data_Out : OUT  std_logic_vector(7 downto 0)
+         ADD : IN  std_logic_vector(5 downto 0);
+         DATA_IN : IN  std_logic_vector(7 downto 0);
+         R_W : IN  std_logic;
+         ENABLE : IN  std_logic;
+         clk : IN  std_logic;
+         Ce : IN  std_logic;
+         DATA_OUT : OUT  std_logic_vector(7 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal H : std_logic := '0';
-   signal RST : std_logic := '0';
-   signal CE : std_logic := '0';
-   signal RW : std_logic := '0';
-   signal Enable : std_logic := '0';
-   signal ADDR : std_logic_vector(5 downto 0) := (others => '0');
-   signal Data_In : std_logic_vector(7 downto 0) := (others => '0');
+   signal ADD : std_logic_vector(5 downto 0) := (others => '0');
+   signal DATA_IN : std_logic_vector(7 downto 0) := (others => '0');
+   signal R_W : std_logic := '0';
+   signal ENABLE : std_logic := '0';
+   signal clk : std_logic := '0';
+   signal Ce : std_logic := '0';
 
  	--Outputs
-   signal Data_Out : std_logic_vector(7 downto 0);
-   -- No clocks detected in port list. Replace <clock> below with 
-   -- appropriate port name 
- 
-   constant H_period : time := 10 ns;
+   signal DATA_OUT : std_logic_vector(7 downto 0);
+
+   -- Clock period definitions
+   constant clk_period : time := 10 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: Mem64octets PORT MAP (
-          H => H,
-          RST => RST,
-          CE => CE,
-          RW => RW,
-          Enable => Enable,
-          ADDR => ADDR,
-          Data_In => Data_In,
-          Data_Out => Data_Out
+   uut: RAM_SP_64_8 PORT MAP (
+          ADD => ADD,
+          DATA_IN => DATA_IN,
+          R_W => R_W,
+          ENABLE => ENABLE,
+          clk => clk,
+          Ce => Ce,
+          DATA_OUT => DATA_OUT
         );
 
    -- Clock process definitions
-   H_process :process
+   clk_process :process
    begin
-		H <= '0';
-		wait for H_period/2;
-		H <= '1';
-		wait for H_period/2;
+		clk <= '0';
+		wait for clk_period/2;
+		clk <= '1';
+		wait for clk_period/2;
    end process;
  
 
@@ -98,29 +94,21 @@ BEGIN
    begin		
       wait for 13 ns;	
 		
-		RST <= '1';
-		wait for 10 ns;
-		
 		-- Test de lecture
-		RST <= '0';
 		CE <= '1';
 		Enable <= '1';
-		RW <= '0';
-		ADDR <= "000111"; -- lecture de 0x07
+		R_W <= '0';
+		ADD <= "000111"; -- lecture de 0x07
 		wait for 20 ns;
 		
 		
 		-- test d'écriture
-		ADDR <= "001000";	-- écriture à 0x08
+		ADD <= "001000";	-- écriture à 0x08
 		Data_In <= X"FF";	-- écriture de 0xFF
-		RW <= '1';			-- activation écriture
+		R_W <= '1';			-- activation écriture
 		wait for 10 ns;
-		RW <= '0';			-- lecture de la valeur écrite
-		
-		
-		
-		
-		
+		R_W <= '0';			-- lecture de la valeur écrite
+
       wait;
    end process;
 

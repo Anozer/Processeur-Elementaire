@@ -171,8 +171,8 @@ Clock_manager : IP_clk
 
 UC : Control_Unit port map (
 	clk25M, 
-	ce1s,
-	--ce25M,
+	--ce1s,
+	ce25M,
 	Reset, 
 	Carry, 
 	Data_Mem_Unit, 
@@ -188,8 +188,8 @@ UC : Control_Unit port map (
 UT : Processing_unit port map (
 	Data_Mem_Unit, 
 	clk25M,
-	ce1s,
-	--ce25M,
+	--ce1s,
+	ce25M,
 	Reset, 
 	Load_Reg1, 
 	Load_Reg_Accu, 
@@ -205,8 +205,8 @@ UM : RAM_SP_64_8 port map (
 	W_Mem, 
 	Enable_Mem,
 	clk25M,
-	ce1s,
-	--ce25M,
+	--ce1s,
+	ce25M,
 	Data_Mem_Unit);
 
 Peripheriques 	 : acces_carte  port map (
